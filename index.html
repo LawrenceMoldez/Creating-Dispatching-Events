@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Creating & Dispatching Events</title>
+</head>
+<body>
+  <h2>Creating & Dispatching Events in JavaScript</h2>
+  <button id="loginBtn">Login</button>
+
+  <script>
+    const loginBtn = document.getElementById("loginBtn");
+
+    // 1. Listen for a custom event
+    document.addEventListener("userLoggedIn", (event) => {
+      console.log("Custom Event Triggered!");
+      console.log("User:", event.detail.username);
+      alert("Welcome, " + event.detail.username + "!");
+    });
+
+    // 2. Normal button click listener
+    loginBtn.addEventListener("click", () => {
+      // Create a custom event with extra data
+      const loginEvent = new CustomEvent("userLoggedIn", {
+        detail: { username: "Pepito", time: new Date().toLocaleTimeString() }
+      });
+
+      // Dispatch the custom event
+      document.dispatchEvent(loginEvent);
+    });
+  </script>
+</body>
+</html>
